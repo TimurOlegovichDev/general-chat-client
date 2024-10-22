@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>1000</height>
+    <height>1022</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,28 +20,114 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(229, 229, 229);</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>140</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font:  bold 36pt &quot;Verdana&quot;;
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="minimumSize">
+        <size>
+         <width>600</width>
+         <height>140</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font:  bold italic 36pt &quot;Verdana&quot;;
 color: rgb(255, 255, 255);
 background-color: rgb(46, 137, 255);
-border-radius: 20px;</string>
-     </property>
-     <property name="text">
-      <string>General chat</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
+border-radius: 10px;</string>
+       </property>
+       <property name="text">
+        <string>Общий чат</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #2e89ff; /* Фоновый цвет кнопки */
+    color: white; /* Цвет текста */
+    border: none; /* Без рамки */
+    border-radius: 20px; /* Закругленные углы */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+	font: 63 14pt &quot;Segoe UI Semibold&quot;;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+QPushButton:hover {
+    background-color: #1d58a1; /* Темнее при наведении */
+}
+
+QPushButton:pressed {
+    background-color: #143c6d; /* Еще темнее при нажатии */
+}</string>
+         </property>
+         <property name="text">
+          <string>Аккаунт</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>80</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #d80004; /* Фоновый цвет кнопки */
+    color: white; /* Цвет текста */
+    border: none; /* Без рамки */
+    border-radius: 20px; /* Закругленные углы */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    font: 63 14pt &quot;Segoe UI Semibold&quot;;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+QPushButton:hover {
+    background-color: #930002; /* Темнее при наведении */
+}
+
+QPushButton:pressed {
+    background-color: #860002; /* Еще темнее при нажатии */
+}</string>
+         </property>
+         <property name="text">
+          <string>Выйти</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QTextBrowser" name="textBrowser">
@@ -60,7 +146,7 @@ background-color: rgb(229, 229, 229);</string>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QTextEdit" name="textEdit">
+      <widget class="QTextEdit" name="messageEdit">
        <property name="maximumSize">
         <size>
          <width>16777215</width>
@@ -94,7 +180,7 @@ QTextEdit::placeholder {
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="sendButton">
        <property name="minimumSize">
         <size>
          <width>120</width>
@@ -103,8 +189,8 @@ QTextEdit::placeholder {
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
-         <height>16777215</height>
+         <width>120</width>
+         <height>120</height>
         </size>
        </property>
        <property name="styleSheet">

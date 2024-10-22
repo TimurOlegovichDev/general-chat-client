@@ -1,6 +1,9 @@
 #include "udprequest.h"
 
-UdpRequest::UdpRequest()
-{
+UdpRequest::UdpRequest(QString json){
+    this->json = json;
+}
 
+QString UdpRequest::getJsonString(){
+    return this->json;
 }

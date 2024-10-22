@@ -1,11 +1,15 @@
 #ifndef UDPREQUEST_H
 #define UDPREQUEST_H
 
+#include <QString>
 
-class UdpRequest
-{
+class UdpRequest{
     public:
-        UdpRequest();
+        UdpRequest(QString json);
+        QString getJsonString();
+
+    private:
+        QString json;
 };
 
 #endif // UDPREQUEST_H

@@ -2,5 +2,7 @@
     <qresource prefix="/icon">
         <file>chat.png</file>
         <file>send.png</file>
+        <file>hide.png</file>
+        <file>show.png</file>
     </qresource>
 </RCC>

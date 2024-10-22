@@ -1,20 +1,25 @@
 #ifndef AUTHWINDOW_H
 #define AUTHWINDOW_H
 
-#include <QMainWindow>
+#include <QWidget>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class AuthWindow; }
-QT_END_NAMESPACE
+namespace Ui {
+    class AuthWindow;
+}
 
-class AuthWindow : public QMainWindow{
+class AuthWindow : public QWidget
+{
         Q_OBJECT
 
     public:
-        AuthWindow(QWidget *parent = nullptr);
+        explicit AuthWindow(QWidget *parent = nullptr);
         ~AuthWindow();
+
+    private slots:
+        void on_showPassButton_clicked(bool checked);
 
     private:
         Ui::AuthWindow *ui;
 };
+
 #endif // AUTHWINDOW_H

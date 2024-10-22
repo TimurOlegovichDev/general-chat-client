@@ -4,6 +4,7 @@
 #include <QLineEdit>
 #include <QWidget>
 #include <QTextBrowser>
+#include <udpsendservice.h>
 
 namespace Ui {
     class ChatWindow;
@@ -13,23 +14,17 @@ class ChatWindow : public QWidget{
         Q_OBJECT
 
     public:
-        explicit ChatWindow(QWidget *parent = nullptr);
+        explicit ChatWindow(QWidget *parent = nullptr,
+                            UdpSendService* sendService = new UdpSendService());
         ~ChatWindow();
 
     private slots:
-        void sendMessage() {
-            QString message = messageInput->text();
-            if (!message.isEmpty()) {
-                messagesArea->append("<b>Вы:</b> " + message);
-                messageInput->clear();
-            }
-        }
+
+        void on_sendButton_clicked();
 
     private:
-        Ui::ChatWindow *ui;
-
-        QTextBrowser *messagesArea;
-        QLineEdit *messageInput;
+        Ui::ChatWindow* ui;
+        UdpSendService* sendService;
 };
 
 #endif // CHATWINDOW_H
