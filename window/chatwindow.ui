@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChatWindow</class>
+ <widget class="QWidget" name="ChatWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>1000</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>GeneralChat</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icons.qrc">
+    <normaloff>:/icon/chat.png</normaloff>:/icon/chat.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(229, 229, 229);</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>140</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font:  bold 36pt &quot;Verdana&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(46, 137, 255);
+border-radius: 20px;</string>
+     </property>
+     <property name="text">
+      <string>General chat</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTextBrowser" name="textBrowser">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>700</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: none;
+background-color: rgb(229, 229, 229);</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QTextEdit" name="textEdit">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>120</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QTextEdit {
+    background-color: #f8f8f8; /* Светло-серый фон */
+    border: 1px solid #ccc; /* Светло-серая рамка */
+    border-radius: 10px; /* Закругленные углы */
+    padding: 12px; /* Отступы внутри поля */
+    font-size: 24px; /* Размер шрифта */
+    color: #212121; /* Цвет текста */
+    selection-background-color: rgb(46, 137, 255);
+    selection-color: white; /* Цвет выделенного текста */
+}
+
+QTextEdit:focus {
+    border: 1px solid #2a86ff; /* Цвет рамки при фокусе */
+}
+
+QTextEdit::placeholder {
+    color: #aaa; /* Цвет текста подсказки */
+    font-style: italic; /* Курсив для подсказки */
+}</string>
+       </property>
+       <property name="placeholderText">
+        <string>Введите сообщение...  </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>120</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #3498db; /* Фоновый цвет кнопки */
+    color: white; /* Цвет текста */
+    border: none; /* Без рамки */
+    border-radius: 50px; /* Закругленные углы */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    font-size: 16px; /* Размер шрифта */
+	margin: 10px;
+}
+
+QPushButton:hover {
+    background-color: #2e6da4; /* Темнее при наведении */
+}
+
+QPushButton:pressed {
+    background-color: #1a5d9a; /* Еще темнее при нажатии */
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons.qrc">
+         <normaloff>:/icon/send.png</normaloff>:/icon/send.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>64</width>
+         <height>64</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
