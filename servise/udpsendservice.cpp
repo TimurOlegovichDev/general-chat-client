@@ -1,16 +1,30 @@
 #include "udpsendservice.h"
+#include <QNetworkDatagram>
 
-#include <serverproperties.h>
-
-UdpSendService::UdpSendService(){
-
+UdpSendService::UdpSendService() : UdpService() {
+    udpSocket = new QUdpSocket();
+    QObject::connect(udpSocket, &QUdpSocket::readyRead, this, &UdpSendService::listen);
 }
 
-bool UdpSendService::send(UdpRequest* req){
+bool UdpSendService::send(UdpRequest* req) {
     int byteSended = udpSocket->writeDatagram(
-                req->getJsonString().toUtf8(),
+                req->getBody().toUtf8(),
                 ServerProperties::IP_ADDRESS,
                 ServerProperties::PORT
     );
-    return byteSended == req->getJsonString().toUtf8().size();
+    return byteSended == req->getBody().toUtf8().size();
+}
+
+
+void UdpSendService::listen() {
+    while (udpSocket->hasPendingDatagrams()) {
+        QNetworkDatagram datagram = udpSocket->receiveDatagram();
+        if (datagram.senderPort() != ServerProperties::PORT) {
+            qDebug() << "Сообщение не от сервера " + QString::number(datagram.senderPort());
+            continue;
+        }
+        emit receivedServerResponse(
+            UdpResponse::fromJson(QString::fromUtf8(datagram.data()))
+        );
+    }
 }

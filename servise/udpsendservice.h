@@ -1,14 +1,26 @@
-#ifndef UDPSENDSERVICE_H
-#define UDPSENDSERVICE_H
+#ifndef UDPSENDER_H
+#define UDPSENDER_H
 
+#include <QUdpSocket>
+#include <QDebug>
 #include "udpservice.h"
+#include "serverproperties.h"
+#include "udprequest.h"
+#include <udpresponse.h>
 
+class UdpSendService : public UdpService {
+        Q_OBJECT
 
-class UdpSendService : UdpService{
     public:
         UdpSendService();
-
         bool send(UdpRequest* req);
+
+    signals:
+        void receivedServerResponse(UdpResponse response);
+
+    private:
+        QUdpSocket* udpSocket;
+        void listen();
 };
 
-#endif // UDPSENDSERVICE_H
+#endif // UDPSENDER_H

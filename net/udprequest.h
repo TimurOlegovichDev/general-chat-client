@@ -2,14 +2,18 @@
 #define UDPREQUEST_H
 
 #include <QString>
+#include <UdpMethod.h>
+#include <QJsonDocument>
 
 class UdpRequest{
     public:
-        UdpRequest(QString json);
-        QString getJsonString();
+        UdpRequest(QString method,
+                   QJsonDocument json);
+
+        QString getBody();
 
     private:
-        QString json;
+        QString body;
 };
 
 #endif // UDPREQUEST_H

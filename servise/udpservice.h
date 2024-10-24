@@ -1,27 +1,23 @@
+#ifndef UDPSERVICE_H
+#define UDPSERVICE_H
+
+#include <QObject>
 #include <QUdpSocket>
 #include <QHostAddress>
 #include <QDebug>
 #include <QRandomGenerator>
 #include <udprequest.h>
 
-class UdpService {
-    public:
-        UdpService() {
-            udpSocket = new QUdpSocket();
+class UdpService : public QObject {
+    Q_OBJECT
 
-            if (!udpSocket->bind(QHostAddress::Any, getRandomPort())) {
-                qDebug() << "Не удалось привязать сокет:" << udpSocket->errorString();
-            } else {
-                qDebug() << "Удачная привязка сокета";
-            }
-        }
+public:
+    UdpService() : QObject() {
+        udpSocket = new QUdpSocket(this);
+    }
 
-    protected:
-        QUdpSocket *udpSocket;
-
-        quint16 getRandomPort() {
-            const int minPort = 1024;
-            const int maxPort = 65535;
-            return QRandomGenerator::global()->bounded(minPort, maxPort + 1);
-        }
+protected:
+    QUdpSocket *udpSocket;
 };
+
+#endif // UDPSERVICE_H

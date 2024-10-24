@@ -1,9 +1,9 @@
 #include "udprequest.h"
 
-UdpRequest::UdpRequest(QString json){
-    this->json = json;
+UdpRequest::UdpRequest(QString method, QJsonDocument  json){
+    this->body = method + "%" + json.toJson();
 }
 
-QString UdpRequest::getJsonString(){
-    return this->json;
+QString UdpRequest::getBody(){
+    return this->body;
 }

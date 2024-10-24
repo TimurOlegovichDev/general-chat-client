@@ -22,9 +22,23 @@ void ChatWindow::on_sendButton_clicked(){
     if(ui->messageEdit->toPlainText().isEmpty()){
         return;
     }
-    if(sendService->send(new UdpRequest(ui->messageEdit->toPlainText()))){
-        qDebug() << "Сообщение отправлено";
+    //    if(sendService->send(
+    //                new UdpRequest(
+    //                    ui->messageEdit->toPlainText().toUtf8()
+    //                    )
+    //                )){
+    //        qDebug() << "Сообщение отправлено";
+    //    } else {
+    //        qDebug() << "Сообщение не отправлено";
+    //    }
+}
+
+void ChatWindow::handle(UdpResponse response){
+    if(response.getCode() == UdpResponseCode::OK){
+
+    } else if (response.getCode() == UdpResponseCode::BAD){
+
     } else {
-        qDebug() << "Сообщение не отправлено";
+        qDebug() << "Получено хз что";
     }
 }

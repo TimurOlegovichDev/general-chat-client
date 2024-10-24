@@ -5,8 +5,8 @@
 
 class UdpMethod {
     public:
-        const QString GET = "GET:";
-        const QString POST = "POST:";
+        static const QString REGISTER;
+        static const QString LOGIN;
 };
 
 #endif // UDPMETHOD_H

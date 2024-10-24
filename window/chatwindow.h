@@ -25,6 +25,8 @@ class ChatWindow : public QWidget{
     private:
         Ui::ChatWindow* ui;
         UdpSendService* sendService;
+
+        void handle(UdpResponse response);
 };
 
 #endif // CHATWINDOW_H
