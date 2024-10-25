@@ -19,7 +19,8 @@ INCLUDEPATH += \
 SOURCES += \
     app.cpp \
     controller/windowcontroller.cpp \
-    entity/client.cpp \
+    entity/clientdto.cpp \
+    entity/messagedto.cpp \
     net/ServerProperties.cpp \
     net/udpmethod.cpp \
     net/udprequest.cpp \
@@ -30,7 +31,9 @@ SOURCES += \
 
 HEADERS += \
     controller/windowcontroller.h \
-    entity/client.h \
+    entity/ChatMessage.h \
+    entity/clientdto.h \
+    entity/messagedto.h \
     net/UdpMethod.h \
     net/serverproperties.h \
     net/udprequest.h \

@@ -6,7 +6,7 @@
 #include <QMessageBox>
 #include <UdpMethod.h>
 #include <udprequest.h>
-#include <client.h>
+#include <clientdto.h>
 #include <QNetworkDatagram>
 #include <udpresponse.h>
 
@@ -39,7 +39,9 @@ class AuthWindow : public QWidget
         Ui::AuthWindow* ui;
         UdpSendService* udpService;
         bool isConnected = false;
-        QTimer *timer;
+
+        const int TIME_IN_MS_TO_WAIT_ANSWER = 3000;
+        QTimer* timerToWaitServerAnswer;
 
         void handle(UdpResponse response);
         bool isValidLineEdit();

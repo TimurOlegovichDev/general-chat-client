@@ -12,14 +12,19 @@ AuthWindow::AuthWindow(QWidget *parent, UdpSendService* udpService) :
     ui->setupUi(this);
     this->udpService = udpService;
 
-    // Подключаем сигнал получения ответа от сервера
     QObject::connect(udpService,
                      &UdpSendService::receivedServerResponse,
                      this,
                      &AuthWindow::handle);
 
-    // Отправляем запрос на подключение
-    sendConnectRequest();
+    timerToWaitServerAnswer = new QTimer(this);
+    timerToWaitServerAnswer->setSingleShot(true);
+    timerToWaitServerAnswer->setInterval(TIME_IN_MS_TO_WAIT_ANSWER);
+    QObject::connect(timerToWaitServerAnswer,
+            &QTimer::timeout,
+            this,
+            &AuthWindow::onConnectTimeout);
+    //sendConnectRequest();
 }
 
 AuthWindow::~AuthWindow() {
@@ -33,11 +38,7 @@ void AuthWindow::sendConnectRequest() {
                     QJsonDocument()
                     )
                 );
-    // Запускаем таймер на 3 секунды для ожидания ответа
-    timer = new QTimer(this);
-    timer->setSingleShot(true);
-    connect(timer, &QTimer::timeout, this, &AuthWindow::onConnectTimeout);
-    timer->start(3000); // 3000 миллисекунд = 3 секунды
+    timerToWaitServerAnswer->start();
 }
 
 void AuthWindow::onConnectTimeout() {
@@ -59,37 +60,42 @@ void AuthWindow::on_buttonLogin_clicked() {
     if (!isValidLineEdit()) {
         return;
     }
-    udpService->send(new UdpRequest(UdpMethod::LOGIN, Client(ui->lineEditUsername->text(), ui->lineEditPassword->text().toUtf8()).toJson()));
+    udpService->send(
+                new UdpRequest(
+                    UdpMethod::LOGIN,
+                    ClientDto(ui->lineEditUsername->text(),
+                           ui->lineEditPassword->text().toUtf8()
+                           ).toJson()
+                    )
+                );
+    timerToWaitServerAnswer->start();
 }
 
 void AuthWindow::on_buttonRegister_clicked() {
     if (!isValidLineEdit()) {
         return;
     }
-    udpService->send(new UdpRequest(UdpMethod::REGISTER, Client(ui->lineEditUsername->text(), ui->lineEditPassword->text().toUtf8()).toJson()));
+    udpService->send(
+                new UdpRequest(
+                    UdpMethod::REGISTER,
+                    ClientDto(ui->lineEditUsername->text(),
+                           ui->lineEditPassword->text().toUtf8()
+                           ).toJson()
+                    )
+                );
+    timerToWaitServerAnswer->start();
 }
 
 void AuthWindow::handle(UdpResponse response) {
     qDebug() << "Получен ответ от сервера: " + response.toString();
-
-    if (!isConnected) {
-        if (response.getCode() == UdpResponseCode::OK) {
-            isConnected = true;
-            timer->stop();
-            return;
-        } else {
-            QMessageBox::critical(this, "Ошибка подключения", response.getBody(), QMessageBox::Ok);
-            return; // Выходим из функции, если не удалось подключиться
-        }
-    }
-
+    timerToWaitServerAnswer->stop();
     if (response.getCode() == UdpResponseCode::OK) {
-        QMessageBox::information(this, "Положительный ответ", response.getBody());
+        QMessageBox::information(this, "General chat", response.getBody());
         emit openChatWindow();
     } else if (response.getCode() == UdpResponseCode::BAD) {
-        QMessageBox::warning(this, "Отрицательный ответ", response.getBody());
+        QMessageBox::warning(this, "General chat", response.getBody());
     } else {
-        QMessageBox::warning(this, "Ошибка", response.getBody());
+        QMessageBox::warning(this, "General chat", response.getBody());
     }
 }
 

@@ -1,5 +1,5 @@
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef CLIENTDTO_H
+#define CLIENTDTO_H
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -7,9 +7,9 @@
 
 
 
-class Client {
+class ClientDto {
     public:
-        Client(const QString& username,
+        ClientDto(const QString& username,
                const QByteArray& password);
 
         QString getUserName();
@@ -22,4 +22,4 @@ class Client {
 
 };
 
-#endif // CLIENT_H
+#endif // CLIENTDTO_H

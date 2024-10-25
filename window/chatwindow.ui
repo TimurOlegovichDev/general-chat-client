@@ -18,7 +18,7 @@
     <normaloff>:/icon/chat.png</normaloff>:/icon/chat.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(229, 229, 229);</string>
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -130,7 +130,7 @@ QPushButton:pressed {
     </layout>
    </item>
    <item>
-    <widget class="QTextBrowser" name="textBrowser">
+    <widget class="QWidget" name="widget" native="true">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -138,8 +138,7 @@ QPushButton:pressed {
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">border: none;
-background-color: rgb(229, 229, 229);</string>
+      <string notr="true">border: none;</string>
      </property>
     </widget>
    </item>
@@ -173,6 +172,13 @@ QTextEdit::placeholder {
     color: #aaa; /* Цвет текста подсказки */
     font-style: italic; /* Курсив для подсказки */
 }</string>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:24px; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="placeholderText">
         <string>Введите сообщение...  </string>

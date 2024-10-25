@@ -1,19 +1,19 @@
-#include "client.h"
+#include "clientdto.h"
 
-Client::Client(const QString& username, const QByteArray& password) :
+ClientDto::ClientDto(const QString& username, const QByteArray& password) :
     username(username),
     password(password)
 {}
 
-QString Client::getUserName(){
+QString ClientDto::getUserName(){
     return this->username;
 }
 
-QByteArray Client::getPassword(){
+QByteArray ClientDto::getPassword(){
     return this->password;
 }
 
-QJsonDocument Client::toJson() const{
+QJsonDocument ClientDto::toJson() const{
     QJsonObject json;
     json["username"] = username;
     json["password"] = QString::fromUtf8(password);
