@@ -24,7 +24,7 @@ AuthWindow::AuthWindow(QWidget *parent, UdpSendService* udpService) :
             &QTimer::timeout,
             this,
             &AuthWindow::onConnectTimeout);
-    //sendConnectRequest();
+    sendConnectRequest();
 }
 
 AuthWindow::~AuthWindow() {

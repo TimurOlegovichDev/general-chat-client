@@ -11,7 +11,7 @@ CONFIG += c++11
 INCLUDEPATH += \
             window/ \
             net/ \
-            servise/ \
+            service/ \
             entity/ \
             handler/ \
             controller/
@@ -25,7 +25,7 @@ SOURCES += \
     net/udpmethod.cpp \
     net/udprequest.cpp \
     net/udpresponse.cpp \
-    servise/udpsendservice.cpp \
+    service/udpsendservice.cpp \
     window/authwindow.cpp \
     window/chatwindow.cpp
 
@@ -38,8 +38,8 @@ HEADERS += \
     net/serverproperties.h \
     net/udprequest.h \
     net/udpresponse.h \
-    servise/udpsendservice.h \
-    servise/udpservice.h\
+    service/udpsendservice.h \
+    service/udpservice.h\
     window/authwindow.h \
     window/chatwindow.h
 

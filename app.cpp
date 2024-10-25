@@ -10,6 +10,6 @@ int main(int argc, char *argv[]){
                 new AuthWindow(),
                 new ChatWindow()
                 );
-    controller->chat();
+    controller->auth();
     return a.exec();
 }
