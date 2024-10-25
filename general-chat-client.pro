@@ -24,7 +24,6 @@ SOURCES += \
     net/udpmethod.cpp \
     net/udprequest.cpp \
     net/udpresponse.cpp \
-    servise/udplistenservice.cpp \
     servise/udpsendservice.cpp \
     window/authwindow.cpp \
     window/chatwindow.cpp
@@ -36,7 +35,6 @@ HEADERS += \
     net/serverproperties.h \
     net/udprequest.h \
     net/udpresponse.h \
-    servise/udplistenservice.h \
     servise/udpsendservice.h \
     servise/udpservice.h\
     window/authwindow.h \

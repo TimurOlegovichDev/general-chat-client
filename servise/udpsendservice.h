@@ -8,7 +8,8 @@
 #include "udprequest.h"
 #include <udpresponse.h>
 
-class UdpSendService : public UdpService {
+class UdpSendService : public QObject {
+
         Q_OBJECT
 
     public:
@@ -19,8 +20,8 @@ class UdpSendService : public UdpService {
         void receivedServerResponse(UdpResponse response);
 
     private:
-        QUdpSocket* udpSocket;
         void listen();
+        QUdpSocket* udpSocket = new QUdpSocket();
 };
 
 #endif // UDPSENDER_H

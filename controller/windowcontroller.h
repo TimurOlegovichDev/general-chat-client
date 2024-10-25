@@ -13,6 +13,7 @@ class WindowController : public QObject {
                          ChatWindow* chatWindow);
         void auth();
         void chat();
+        void closeAll();
     private:
         AuthWindow* authWindow;
         ChatWindow* chatWindow;

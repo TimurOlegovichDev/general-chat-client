@@ -8,10 +8,10 @@
 #include <udprequest.h>
 #include <client.h>
 #include <QNetworkDatagram>
-#include <udplistenservice.h>
 #include <udpresponse.h>
 
-namespace Ui {
+namespace Ui
+{
     class AuthWindow;
 }
 
@@ -33,12 +33,18 @@ class AuthWindow : public QWidget
 
     signals:
         void openChatWindow();
+        void exit();
 
     private:
         Ui::AuthWindow* ui;
         UdpSendService* udpService;
+        bool isConnected = false;
+        QTimer *timer;
 
         void handle(UdpResponse response);
+        bool isValidLineEdit();
+        void sendConnectRequest();
+        void onConnectTimeout();
 };
 
 #endif // AUTHWINDOW_H

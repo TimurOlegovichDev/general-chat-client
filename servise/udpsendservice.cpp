@@ -1,8 +1,7 @@
 #include "udpsendservice.h"
 #include <QNetworkDatagram>
 
-UdpSendService::UdpSendService() : UdpService() {
-    udpSocket = new QUdpSocket();
+UdpSendService::UdpSendService() : QObject(){
     QObject::connect(udpSocket, &QUdpSocket::readyRead, this, &UdpSendService::listen);
 }
 
