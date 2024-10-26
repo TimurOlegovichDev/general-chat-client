@@ -8,16 +8,22 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QScrollArea>
+#include <messagedto.h>
+#include <QJsonObject>
 
 ChatWindow::ChatWindow(QWidget *parent, UdpSendService* sendService) :
     QWidget(parent),
     ui(new Ui::ChatWindow){
     ui->setupUi(this);
+
+    QObject::connect(sendService,
+                     &UdpSendService::receivedServerResponse,
+                     this,
+                     &ChatWindow::handle);
     this->sendService = sendService;
     scrollArea = new QScrollArea();
     scrollArea->setWidgetResizable(true);
     mainLayout = new QVBoxLayout(ui->widget);
-
 }
 
 ChatWindow::~ChatWindow(){
@@ -25,20 +31,52 @@ ChatWindow::~ChatWindow(){
 }
 
 void ChatWindow::on_sendButton_clicked(){
-    scrollLayout->addWidget(new ChatMessage("qwerty123", "I check Delegate and I think this isn't what I want. Of course I can add QLabel to QTableView, but when I click on QLabel I see the QTableView's cell. I setShowGrid to false but this isn't what I need.", "12:46", true));
-    scrollLayout->addWidget(new ChatMessage("Niggalas", "Did you read about Delegates ? The Editor is only active when editing, rest of the time its not shown. Then its paint job to show the data.", "12:46", false));
-    scrollContent->setLayout(scrollLayout);
-    scrollArea->setWidget(scrollContent);
-    mainLayout->addWidget(scrollArea);
-    ui->widget->setLayout(mainLayout);
+    sendService->send(
+                new UdpRequest(
+                    UdpMethod::POST_MESSAGE,
+                    MessageDto(
+                        ui->messageEdit->toPlainText(),
+                        senderName
+                        ).toJson()
+                    )
+                );
+    ui->messageEdit->clear();
 }
 
 void ChatWindow::handle(UdpResponse response){
-    if(response.getCode() == UdpResponseCode::OK){
-
+    if(response.getCode() == UdpResponseCode::HAS_MESSAGE){
+        QString jsonString = response.getBody();
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+        QJsonObject jsonObject = jsonDoc.object();
+        MessageDto msgDto = MessageDto::fromJson(jsonObject);
+        if(!msgDto.isValid()){
+            qDebug() << "Невалидное сообщение: " + msgDto.getSenderName() + msgDto.getSenderPort();
+            return;
+        }
+        scrollLayout->addWidget(new ChatMessage(
+                                    msgDto.getSenderName(),
+                                    msgDto.getText(),
+                                    "не указано",
+                                    msgDto.getSenderName() == this->senderName
+                                    ));
+        scrollContent->setLayout(scrollLayout);
+        scrollArea->setWidget(scrollContent);
+        mainLayout->addWidget(scrollArea);
+        ui->widget->setLayout(mainLayout);
+        qDebug() << "Сообщение выведено";
     } else if (response.getCode() == UdpResponseCode::BAD){
 
-    } else {
-        qDebug() << "Получено хз что";
+    } else if (response.getCode() == UdpResponseCode::CLOSE_CONNECTION){
+        emit openAuthWindow();
     }
+}
+
+const QString& ChatWindow::getSenderName() const
+{
+    return senderName;
+}
+
+void ChatWindow::setSenderName(const QString& newSenderName)
+{
+    senderName = newSenderName;
 }

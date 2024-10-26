@@ -32,7 +32,7 @@ class AuthWindow : public QWidget
         void on_buttonRegister_clicked();
 
     signals:
-        void openChatWindow();
+        void openChatWindow(QString clientName);
         void exit();
 
     private:

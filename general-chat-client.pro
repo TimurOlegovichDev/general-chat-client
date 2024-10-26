@@ -39,7 +39,6 @@ HEADERS += \
     net/udprequest.h \
     net/udpresponse.h \
     service/udpsendservice.h \
-    service/udpservice.h\
     window/authwindow.h \
     window/chatwindow.h
 

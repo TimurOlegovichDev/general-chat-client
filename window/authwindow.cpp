@@ -28,8 +28,14 @@ AuthWindow::AuthWindow(QWidget *parent, UdpSendService* udpService) :
 }
 
 AuthWindow::~AuthWindow() {
+    qDebug() << "Вызван деструктор окна авторизации";
+    QObject::disconnect(udpService,
+                     &UdpSendService::receivedServerResponse,
+                     this,
+                     &AuthWindow::handle);
     delete ui;
 }
+
 
 void AuthWindow::sendConnectRequest() {
     udpService->send(
@@ -89,12 +95,14 @@ void AuthWindow::on_buttonRegister_clicked() {
 void AuthWindow::handle(UdpResponse response) {
     qDebug() << "Получен ответ от сервера: " + response.toString();
     timerToWaitServerAnswer->stop();
+    if(!isConnected){
+        isConnected = true;
+        return;
+    }
     if (response.getCode() == UdpResponseCode::OK) {
         QMessageBox::information(this, "General chat", response.getBody());
-        emit openChatWindow();
+        emit openChatWindow(ui->lineEditUsername->text());
     } else if (response.getCode() == UdpResponseCode::BAD) {
-        QMessageBox::warning(this, "General chat", response.getBody());
-    } else {
         QMessageBox::warning(this, "General chat", response.getBody());
     }
 }

@@ -14,6 +14,10 @@ bool UdpSendService::send(UdpRequest* req) {
     return byteSended == req->getBody().toUtf8().size();
 }
 
+int UdpSendService::getLocalPort(){
+    return this->udpSocket->localPort();
+}
+
 
 void UdpSendService::listen() {
     while (udpSocket->hasPendingDatagrams()) {

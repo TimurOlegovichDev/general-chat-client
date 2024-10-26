@@ -21,9 +21,10 @@ void WindowController::auth(){
     chatWindow->close();
 }
 
-void WindowController::chat(){
+void WindowController::chat(QString clientName){
     authWindow->close();
     chatWindow->show();
+    chatWindow->setSenderName(clientName);
 }
 
 void WindowController::closeAll(){

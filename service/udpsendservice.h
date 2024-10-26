@@ -3,7 +3,6 @@
 
 #include <QUdpSocket>
 #include <QDebug>
-#include "udpservice.h"
 #include "serverproperties.h"
 #include "udprequest.h"
 #include <udpresponse.h>
@@ -15,6 +14,7 @@ class UdpSendService : public QObject {
     public:
         UdpSendService();
         bool send(UdpRequest* req);
+        int getLocalPort();
 
     signals:
         void receivedServerResponse(UdpResponse response);

@@ -1,13 +1,17 @@
 #ifndef MESSAGEDTO_H
 #define MESSAGEDTO_H
 
+#include <QJsonDocument>
 #include <QString>
 
+class QJsonObject;
 
 
-class MessageDto
-{
+class MessageDto {
+
     public:
+        MessageDto(QString text, QString senderName);
+
         MessageDto();
 
         int getSenderPort() const;
@@ -17,6 +21,11 @@ class MessageDto
         const QString& getText() const;
 
         const QString& getTime() const;
+
+        static MessageDto fromJson(QJsonObject& json);
+        bool isValid() const;
+
+        QJsonDocument toJson() const;
 
     private:
         QString senderName;

@@ -7,6 +7,7 @@
 #include <udpsendservice.h>
 #include <QHBoxLayout>
 #include <QScrollArea>
+#include <clientdto.h>
 
 namespace Ui {
     class ChatWindow;
@@ -19,6 +20,9 @@ class ChatWindow : public QWidget{
         explicit ChatWindow(QWidget *parent = nullptr,
                             UdpSendService* sendService = new UdpSendService());
         ~ChatWindow();
+
+        const QString& getSenderName() const;
+        void setSenderName(const QString& newSenderName);
 
     private slots:
 
@@ -38,6 +42,9 @@ class ChatWindow : public QWidget{
         QScrollArea *scrollArea;
         QWidget *scrollContent = new QWidget();
         QVBoxLayout *scrollLayout = new QVBoxLayout(scrollContent);
+
+        QString senderName;
+
 };
 
 #endif // CHATWINDOW_H
